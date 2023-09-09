@@ -7,11 +7,30 @@
   min-height: 100vh;
 }
 
-.copy {
+.header {
+  font-family: 'grand-slang-roman';
+}
+
+.welcome {
+  font-family: 'grand-slang-roman';
   max-width: 800px;
   font-size: 1.2rem;
   margin: 1rem 0;
   text-align: center;
+}
+
+.copy {
+  font-family: 'grand-slang-roman';
+  max-width: 800px;
+  font-size: 1.2rem;
+  margin: 1rem 0;
+  text-align: flex-start;
+  width: 100%;
+}
+
+.copy a:hover {
+  cursor: pointer;
+  text-decoration: line-through;
 }
 
 .inputSnippetContainer {
@@ -20,10 +39,11 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0.5rem;
+  padding: 0.5rem 0 0 0;
 }
 
 .input {
+  font-family: 'grand-slang-roman';
   width: 100%;
   padding: 0.5rem;
   font-size: 1.2rem;
@@ -35,4 +55,16 @@
 @font-face {
   font-family: 'grand-slang-roman';
   src: url('/public/fonts/GrandSlang-Roman.woff') format('woff');
+}
+
+@media screen and (max-width: 600px) {
+  .main {
+    padding: 2rem;
+  }
+  .copy {
+    font-size: 1rem;
+  }
+  .input {
+    font-size: 1rem;
+  }
 }

@@ -1,6 +1,6 @@
 'use client'
 import styles from './page.module.css'
-import { Snippet } from '@geist-ui/core'
+import { Snippet, Divider } from '@geist-ui/core'
 import { useState } from 'react'
 
 interface CustomInputProps {
@@ -32,11 +32,11 @@ export default function Home() {
 
   return (
     <main className={styles.main}>
-      <h1>PASTY</h1>
-      <p className={styles.copy}>
-        Welcome to Pasty! No more copying and pasting from multiple tabs. Whether you&apos;re on a job hunt, filling out
-        forms, or plotting world domination, Pasty simplifies your life. Pasty respects your privacy, and does not store
-        any of your data. All data will be cleared when you close the tab.
+      <h1 className={styles.header}>PASTY</h1>
+      <p className={styles.welcome}>
+        Welcome to Pasty! No more copying and pasting from multiple tabs. Whether you&apos;re filling out forms, on a
+        job hunt, or plotting world domination, Pasty simplifies your life. Pasty respects your privacy, and does not
+        store any of your data. All data will be cleared when you close the tab.
       </p>
 
       <CustomInput
@@ -73,6 +73,16 @@ export default function Home() {
         onChange={(e) => setAddress(e.target.value)}
         label='ADDRESS:'
       />
+      <Divider />
+      <div className={styles.inputSnippetContainer}>
+        <p className={styles.copy}>If you find Pasty useful, please share it with your friends!</p>
+        <Snippet width='100%' symbol='' text='https://pastypastypasty.vercel.app' />
+      </div>
+      <div className={styles.inputSnippetContainer}>
+        <p className={styles.copy}>
+          Have feedback? You can reach me <a href='https://isaacmoreno.vercel.app/contact'>here</a>. Cheers!
+        </p>
+      </div>
     </main>
   )
 }
