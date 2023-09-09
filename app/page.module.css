@@ -114,6 +114,14 @@
   transition: opacity 0.2s;
 }
 
+.contactContainer {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  width: 100%;
+  max-width: 800px;
+}
+
 @font-face {
   font-family: 'grand-slang-roman';
   src: url('/public/fonts/GrandSlang-Roman.woff') format('woff');

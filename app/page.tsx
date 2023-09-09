@@ -111,11 +111,7 @@ export default function Home() {
         onChange={(e) => setAddress(e.target.value)}
         label='ADDRESS:'
       />
-      <div className={styles.inputContainer}>
-        <p className={styles.copy}>If you find Pasty useful, please share it with your friends!</p>
-        <Snippet width='100%' symbol='' text='https://pastypastypasty.vercel.app' />
-      </div>
-      <div className={styles.inputContainer}>
+      <div className={styles.contactContainer}>
         <p className={styles.copy}>
           Have feedback? You can reach me <a href='https://isaacmoreno.vercel.app/contact'>here</a>. Cheers!
         </p>
