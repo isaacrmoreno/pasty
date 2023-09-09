@@ -1,7 +1,8 @@
 'use client'
 import styles from './page.module.css'
-import { Snippet, Divider } from '@geist-ui/core'
-import { useState } from 'react'
+import { Snippet, useClipboard } from '@geist-ui/core'
+import { useState, useEffect } from 'react'
+import Copy from '@geist-ui/icons/copy'
 
 interface CustomInputProps {
   placeholder: string
@@ -11,10 +12,45 @@ interface CustomInputProps {
 }
 
 const CustomInput = ({ placeholder, value, onChange, label }: CustomInputProps) => {
+  const [copied, setCopied] = useState<boolean>(false)
+  const { copy } = useClipboard()
+
+  const copyToClipboard = (text: string) => {
+    console.log('copying to clipboard: ', text)
+    try {
+      copy(text)
+      setCopied(true)
+    } catch (err) {
+      console.error('Failed to copy: ', err)
+    }
+  }
+
+  useEffect(() => {
+    let timeout: NodeJS.Timeout | null = null
+
+    if (copied) {
+      timeout = setTimeout(() => {
+        setCopied(false)
+      }, 1500) // 1.5 seconds
+    }
+
+    return () => {
+      if (timeout) {
+        clearTimeout(timeout)
+      }
+    }
+  }, [copied])
+
   return (
-    <div className={styles.inputSnippetContainer}>
-      <input className={styles.input} type='text' placeholder={placeholder} value={value} onChange={onChange} />
-      <Snippet width='100%' symbol={label} text={value} />
+    <div className={styles.container}>
+      <label className={styles.label}>{label}</label>
+      <div className={styles.inputContainer}>
+        <input className={styles.input} type='text' placeholder={placeholder} value={value} onChange={onChange} />
+        <button className={styles.iconButton} onClick={() => copyToClipboard(value)}>
+          <Copy className={styles.icon} color={'black'} size={30} />
+        </button>
+        {copied && <div className={styles.tooltip}>Copied!</div>}
+      </div>
     </div>
   )
 }
@@ -29,6 +65,8 @@ export default function Home() {
   const [email, setEmail] = useState('')
   const [phone, setPhone] = useState('')
   const [address, setAddress] = useState('')
+
+  console.log('customField: ', customField)
 
   return (
     <main className={styles.main}>
@@ -73,12 +111,11 @@ export default function Home() {
         onChange={(e) => setAddress(e.target.value)}
         label='ADDRESS:'
       />
-      <Divider />
-      <div className={styles.inputSnippetContainer}>
+      <div className={styles.inputContainer}>
         <p className={styles.copy}>If you find Pasty useful, please share it with your friends!</p>
         <Snippet width='100%' symbol='' text='https://pastypastypasty.vercel.app' />
       </div>
-      <div className={styles.inputSnippetContainer}>
+      <div className={styles.inputContainer}>
         <p className={styles.copy}>
           Have feedback? You can reach me <a href='https://isaacmoreno.vercel.app/contact'>here</a>. Cheers!
         </p>
